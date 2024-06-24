@@ -1,0 +1,8 @@
+user.email=andrewfayez333@gmail.com
+user.name=AndrewFayez
+filter.lfs.clean=git-lfs clean -- %f
+filter.lfs.smudge=git-lfs smudge -- %f
+filter.lfs.process=git-lfs filter-process
+filter.lfs.required=true
+credential.helper=cache
+github.token=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
