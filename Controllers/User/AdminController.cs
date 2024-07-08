@@ -68,7 +68,7 @@ namespace BYO3WebAPI.Controllers.User
         }
 
 
-        [HttpGet("GetOneAdsPending")]
+        [HttpGet("GetOneAds/Pending")]
         public async Task<IActionResult> GetOneAdsPending(int id)
         {
             var posts = _db.Ads.Where(x => x.Id == id).SelectMany(x => x.UserAds.Where(x => x.Ads.IsApproved == false).Select(x => new
@@ -119,7 +119,7 @@ namespace BYO3WebAPI.Controllers.User
 
 
 
-        [HttpPut("ApprovedOnAds")]
+        [HttpPut("ApprovedOn/Ads")]
         public async Task<IActionResult> AdminIsApproved([FromForm] int id)
         {
 
@@ -185,6 +185,141 @@ namespace BYO3WebAPI.Controllers.User
                 });
 
         }
+
+
+
+
+
+        [HttpPut("ApprovedOn/Service")]
+        public async Task<IActionResult> AdminIsApprovedService([FromForm] int id)
+        {
+
+            var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id);
+            if (Ads == null)
+            {
+                return NotFound(new { Messages = $"Service Id {id} Not Exists Or IsApproved" });
+            }
+
+            if (Ads.IsApproved == false)
+                Ads.IsApproved = true;
+
+
+            var userAds = _db.UserService
+                 .Where(x => x.ServiceId == id).Select(x => x.User.FullName);
+
+            _db.Service.Update(Ads);
+            _db.SaveChanges();
+
+
+            return Ok(
+                new
+                {
+                    Ads.Id,
+                    userAds,
+                    Ads.Title,
+                    Ads.Type1,
+                    Ads.Type2,
+                    Ads.Type3,
+                    Ads.Country,
+                    Ads.City,
+                    Ads.CreatedDate,
+                    Ads.Description,
+                    Ads.Price,
+                    Ads.Image1,
+                    Ads.Image2,
+                    Ads.Image3,
+                    Ads.Latitude,
+                    Ads.Longitude,
+                    Ads.PhoneNumber,
+                    Ads.Warranty,
+                    Ads.WhatsAppNumber,
+                    Ads.CountDay,
+                    Ads.CountPerson,
+                    Ads.FromCountry,
+                    Ads.ToCountry,
+                    Ads.IsApproved,
+                });
+
+        }
+
+
+
+        [HttpGet("GetAllService/Pending")]
+        public async Task<IActionResult> GetAllServicePending()
+        {
+            var posts = await _db.Service
+                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == false).Select(x => new
+                 {
+                    
+                     x.User.FullName,
+                     x.Service.Id,
+                     x.Service.Title,
+                     x.Service.Description,
+                     x.Service.Type1,
+                     x.Service.Type2,
+                     x.Service.Type3,
+                     x.Service.Image1,
+                     x.Service.Image2,
+                     x.Service.Image3,
+                     x.Service.City,
+                     x.Service.Country,
+                     x.Service.CreatedDate,
+                     x.Service.Longitude,
+                     x.Service.Latitude,
+                     x.Service.PhoneNumber,
+                     x.Service.Price,
+                     x.Service.CountDay,
+                     x.Service.ToCountry,
+                     x.Service.Warranty,
+                     x.Service.FromCountry,
+                     x.Service.CountPerson,
+                     x.Service.WhatsAppNumber,
+                     x.Service.IsApproved
+                 })).ToListAsync();
+            return Ok(posts);
+        }
+
+
+
+        [HttpGet("GetOneService/Pending")]
+        public async Task<IActionResult> GetOneServicePending(int id)
+        {
+            var posts = _db.Service.Where(x => x.Id == id).SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == false).Select(x => new
+            {
+                x.User.FullName,
+                x.Service.Id,
+                x.Service.Title,
+                x.Service.Description,
+                x.Service.Type1,
+                x.Service.Type2,
+                x.Service.Type3,
+                x.Service.Image1,
+                x.Service.Image2,
+                x.Service.Image3,
+                x.Service.City,
+                x.Service.Country,
+                x.Service.CreatedDate,
+                x.Service.Longitude,
+                x.Service.Latitude,
+                x.Service.PhoneNumber,
+                x.Service.Price,
+                x.Service.CountDay,
+                x.Service.ToCountry,
+                x.Service.Warranty,
+                x.Service.FromCountry,
+                x.Service.CountPerson,
+                x.Service.WhatsAppNumber,
+                x.Service.IsApproved
+            }));
+            return Ok(posts);
+        }
+
+
+
+      
+
+
+
 
 
 

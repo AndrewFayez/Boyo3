@@ -247,6 +247,7 @@ namespace BYO3WebAPI.Controllers.Ads
             };
 
             await _db.UserPackage.AddAsync(userPackage);
+            _db.SaveChanges();
 
             var post = await _db.Users.SingleOrDefaultAsync(x => x.Id == userPackage.UserId);
             post.CountAds = 0;

@@ -57,7 +57,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType2(string service)
         {
             var post =await _db.Service.Where(x => x.Type2 == service)
-               .SelectMany(x => x.UserService.Select(x => new
+               .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                {
                    x.Service.Id,
                    x.Service.Title,
@@ -80,7 +80,8 @@ namespace BYO3WebAPI.Controllers.Filters
                    x.Service.Warranty,
                    x.Service.FromCountry,
                    x.Service.CountPerson,
-                   x.Service.WhatsAppNumber
+                   x.Service.WhatsAppNumber,
+                   x.Service.IsApproved
                })).ToListAsync();
             return  Ok(post);
         }
@@ -92,7 +93,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType3(string service)
         {
             var post =await _db.Service.Where(x => x.Type3 == service)
-               .SelectMany(x => x.UserService.Select(x => new
+               .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                {
                    x.Service.Id,
                    x.Service.Title,
@@ -115,7 +116,8 @@ namespace BYO3WebAPI.Controllers.Filters
                    x.Service.Warranty,
                    x.Service.FromCountry,
                    x.Service.CountPerson,
-                   x.Service.WhatsAppNumber
+                   x.Service.WhatsAppNumber,
+                   x.Service.IsApproved
                })).ToListAsync();
             return Ok(post);
         }
@@ -129,7 +131,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType1And2(string serv1, string serv2)
         {
             var servic =await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -152,7 +154,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return  Ok(servic);
         }
@@ -163,7 +166,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType2And3(string serv3, string serv2)
         {
             var servic =await _db.Service.Where(x => x.Type2 == serv3 && x.Type3 == serv2)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -186,7 +189,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return  Ok(servic);
         }
@@ -198,7 +202,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllAdsType1And3(string serv1, string serv2)
         {
             var servic =await _db.Service.Where(x => x.Type1 == serv1 && x.Type3 == serv2)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -221,7 +225,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return  Ok(servic);
         }
@@ -233,7 +238,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllAdsType1AndCountry(string serv1, string Country)
         {
             var caravan =await _db.Service.Where(x => x.Type1 == serv1 && x.Country == Country)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -256,7 +261,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return  Ok(caravan);
         }
@@ -268,7 +274,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllAdsType1And2AndCountry(string serv1, string serv2, string Country)
         {
             var servic = await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2 && x.Country == Country)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -291,7 +297,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return  Ok(servic);
         }
@@ -304,7 +311,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllAdsType1AndType2And3(string serv1, string serv2, string serv3)
         {
             var servic = await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2 && x.Type3 == serv3)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -327,7 +334,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return  Ok(servic);
         }
@@ -338,7 +346,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllserviceCountryAndCity(string city, string Country)
         {
             var caravan = await _db.Service.Where(x => x.City == city && x.Country == Country)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -361,7 +369,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return Ok(caravan);
         }
@@ -372,7 +381,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType1And2AndCity(string serv1, string serv2, string city)
         {
             var servic = await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2 && x.City == city)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -395,7 +404,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return Ok(servic);
         }
@@ -407,7 +417,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType1AndCity(string serv1,  string city)
         {
             var servic = await _db.Service.Where(x => x.Type1 == serv1 &&  x.City == city)
-                .SelectMany(x => x.UserService.Select(x => new
+                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -430,7 +440,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 })).ToListAsync();
             return Ok(servic);
         }

@@ -195,7 +195,8 @@ namespace BYO3WebAPI.Controllers.Services
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }
                 ).ToListAsync();
             return Ok(Ads);

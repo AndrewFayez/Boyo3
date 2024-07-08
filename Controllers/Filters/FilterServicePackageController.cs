@@ -26,7 +26,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved==true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -49,7 +49,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Camping");
 
                 return Ok(ads);
@@ -69,7 +70,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -92,8 +93,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Maintenance");
 
                 return Ok(ads);
@@ -114,7 +115,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -137,8 +138,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Rent");
 
                 return Ok(ads);
@@ -158,7 +159,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -181,8 +182,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Transfer");
 
                 return Ok(ads);
@@ -205,7 +206,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -228,8 +229,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Washing");
 
                 return Ok(ads);
@@ -250,7 +251,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -273,8 +274,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Waste Dispol");
 
                 return Ok(ads);
@@ -294,7 +295,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -317,8 +318,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 }).Where(x => x.Type1 == "Water Filling");
 
                 return Ok(ads);
@@ -337,7 +338,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             foreach (var item in pac)
             {
-                var ads = _db.UserService.Where(x => x.UserId == item.Id).Select(x => new
+                var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
                     x.Service.Id,
                     x.Service.Title,
@@ -360,8 +361,8 @@ namespace BYO3WebAPI.Controllers.Filters
                     x.Service.Warranty,
                     x.Service.FromCountry,
                     x.Service.CountPerson,
-                    x.Service.WhatsAppNumber
-
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved
                 });
 
                 return Ok(ads);
