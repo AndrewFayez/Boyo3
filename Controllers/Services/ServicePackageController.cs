@@ -132,7 +132,7 @@ namespace BYO3WebAPI.Controllers.Services
         public async Task<IActionResult> GetAllAdsForPackages(int packageId)
         {
             var posts = await _db.ServiceForPackage.Where(x => x.ServiceId == packageId)
-              .SelectMany(P => P.Service.ServiceForPackage.Select(x => new
+              .SelectMany(P => P.Service.ServiceForPackage.Where(x=>x.Service.IsApproved == true).Select(x => new
               {
                   x.ServicePackage.Id,
                   x.ServicePackage.Title,
@@ -156,7 +156,8 @@ namespace BYO3WebAPI.Controllers.Services
                   x.Service.Warranty,
                   x.Service.FromCountry,
                   x.Service.CountPerson,
-                  x.Service.WhatsAppNumber
+                  x.Service.WhatsAppNumber,
+                  x.Service.IsApproved,
               })).ToListAsync();
             return Ok(posts);
         }
@@ -220,6 +221,9 @@ namespace BYO3WebAPI.Controllers.Services
             });
 
         }
+
+
+
 
 
         [HttpPost("UserAddServicePakage")]

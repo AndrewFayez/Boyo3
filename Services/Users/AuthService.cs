@@ -24,13 +24,17 @@ namespace BYO3WebAPI.Services.Users
 
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IWebHostEnvironment _host;
+        private readonly ApplicationDbContext _db;
+
         private readonly JWT _jwt;
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt, IWebHostEnvironment host)
+        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<JWT> jwt, IWebHostEnvironment host, ApplicationDbContext db)
         {
             _userManager = userManager;
             _jwt = jwt.Value;
             _host = host;
+            _db = db;
+
         }
 
 
@@ -40,23 +44,28 @@ namespace BYO3WebAPI.Services.Users
         public async Task<AuthModel> RegistrationAsync(RegisterModel model)
         {
 
-            var useremail = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == model.Email);
-            var username = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == model.Username);
+            //var useremail = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == model.Email);
+            //var username = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == model.Username);
 
 
-            if (useremail != null && username != null)
+            //if (useremail != null && username != null)
+            //    return new AuthModel { Message = "Email or UserName is already registered!" };
+
+
+
+            var userEmail = await _db.Users.SingleOrDefaultAsync(x => x.Email.ToLower() == model.Email.ToLower());
+            if (userEmail != null)
                 return new AuthModel { Message = "Email or UserName is already registered!" };
+
+            if (await _userManager.FindByNameAsync(model.Username) is not null)
+                return new AuthModel { Message = "Email or UserName is already registered!" };
+
 
 
             if (model.ImageCover == null || model.ImageCover.Length == 0)
             {
-
                  return new AuthModel { Message = "StaticFile/Images/NoImage.jpeg" };
-
-
             }
-
-
 
             string randem1 = Guid.NewGuid().ToString();
 

@@ -32,6 +32,7 @@ namespace BYO3WebAPI.Models.DataModels.ServiceModel
         public string ToCountry { get; set; }
 
         public DateTime CreatedDate { get; set; }
+        public bool? IsApproved { get; set; }
 
         public virtual ICollection<UserService> UserService { get; set; }
         public virtual ICollection<ServiceForPackage> ServiceForPackage { get; set; }

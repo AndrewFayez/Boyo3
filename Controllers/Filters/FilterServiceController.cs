@@ -21,7 +21,7 @@ namespace BYO3WebAPI.Controllers.Filters
         public async Task<IActionResult> GetAllServiceType1(string service)
         {
             var post =await _db.Service.Where(x => x.Type1 == service)
-               .SelectMany(x => x.UserService.Select(x => new
+               .SelectMany(x => x.UserService.Where(x=>x.Service.IsApproved==true).Select(x => new
                {
                    x.Service.Id,
                    x.Service.Title,
@@ -44,7 +44,8 @@ namespace BYO3WebAPI.Controllers.Filters
                    x.Service.Warranty,
                    x.Service.FromCountry,
                    x.Service.CountPerson,
-                   x.Service.WhatsAppNumber
+                   x.Service.WhatsAppNumber,
+                   x.Service.IsApproved,
                })).ToListAsync();
             return  Ok(post);
         }

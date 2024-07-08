@@ -50,6 +50,8 @@ namespace BYO3WebAPI.Models.DataModels.PostModel
         public int? Height { get; set; } = 0;
 
         public DateTime CreatedDate { get; set; }
+        public bool? IsApproved { get; set; } = false;
+
 
         public virtual ICollection<UserAds> UserAds { get; set; }
         public virtual ICollection<AdsForPackage>  AdsForPackages { get; set; }

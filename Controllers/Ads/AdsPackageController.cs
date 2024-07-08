@@ -24,7 +24,7 @@ namespace BYO3WebAPI.Controllers.Ads
         }
 
         // POST api/<PackageController>
-        [HttpPost("AdminAddPackage")]
+        [HttpPost("Admin/AddPackage")]
         public async Task<IActionResult> AddPackage([FromForm] DTOPackage dTOPackage)
         {
             AdsPackageModel packageModel = new()
@@ -46,7 +46,7 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
         // GET: api/<PackageController>
-        [HttpGet("GetAllPackages")]
+        [HttpGet("Admin/GetAllPackages")]
         public async Task<IActionResult> GetAllPackages()
         {
             var pack = await _db.Package.Select(x => new
@@ -65,7 +65,7 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
         // GET api/<PackageController>/5
-        [HttpGet("GetOnePackages")]
+        [HttpGet("Admin/GetOnePackages")]
         public async Task<IActionResult> GetOnePackages(int id)
         {
             var pack = _db.Package.Where(x => x.Id == id).Select(x => new
@@ -83,7 +83,7 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
 
-        [HttpGet("GetUserAdsPackages")]
+        [HttpGet("Admin/GetUserAdsPackages")]
         public async Task<IActionResult> GetUserPackages(string userId)
         {
             var posts = await _db.UserPackage.Where(x => x.UserId == userId)
@@ -100,7 +100,7 @@ namespace BYO3WebAPI.Controllers.Ads
         }
 
 
-        [HttpGet("GetAllUserFromAdsPackage")]
+        [HttpGet("Admin/GetAllUserFromAdsPackage")]
         public async Task<IActionResult> GetAllUserFromAdsPackage(int id)
         {
             var posts = await _db.UserPackage.Where(x => x.PackageId == id)
@@ -124,11 +124,11 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
 
-        [HttpGet("GetAllAdsForPackages")]
+        [HttpGet("Admin/GetAllAdsForPackages")]
         public async Task<IActionResult> GetAllAdsForPackages(int packageId)
         {
             var posts = await _db.AdsForPackage.Where(x => x.PackageId == packageId)
-              .SelectMany(P => P.Ads.AdsForPackages.Select(x => new
+              .SelectMany(P => P.Ads.AdsForPackages.Where(x => x.Ads.IsApproved == true).Select(x => new
               {
                   x.Package.Id,
                   x.Ads.Title,
@@ -172,6 +172,7 @@ namespace BYO3WebAPI.Controllers.Ads
                   x.Ads.Security,
                   x.Ads.Specifications,
                   x.Ads.YearMake,
+                  x.Ads.IsApproved
               })).ToListAsync();
             return Ok(posts);
         }
@@ -182,7 +183,7 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
 
-        [HttpPut("UpdatePackage")]
+        [HttpPut("Admin/UpdatePackage")]
         public async Task<IActionResult> UpatePost([FromForm] int id, [FromForm] DTOPackage dTOPackage)
         {
 
@@ -230,7 +231,7 @@ namespace BYO3WebAPI.Controllers.Ads
         }
 
 
-        [HttpPost("UserAddPakage")]
+        [HttpPost("Admin/UserAddPakage")]
         public async Task<IActionResult> UserAddPakage(int packageId, string userId)
         {
             var userpack = await _db.UserPackage.SingleOrDefaultAsync(x => x.UserId == userId );

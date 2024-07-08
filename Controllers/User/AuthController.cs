@@ -4,12 +4,15 @@ using BYO3WebAPI.Models.DataModel.TokenDataModel;
 using BYO3WebAPI.Models.DataModels.UserModel;
 using BYO3WebAPI.Services.Email;
 using BYO3WebAPI.Services.Users;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BYO3WebAPI.Controllers.User
 {
+    [EnableCors("AllowAll")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
@@ -46,7 +49,6 @@ namespace BYO3WebAPI.Controllers.User
 
             return Ok(result);
         }
-
 
 
         [HttpPost("Login")]

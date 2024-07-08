@@ -307,6 +307,9 @@ namespace BYO3WebAPI.Migrations
                     b.Property<string>("Image3")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("Kilometer")
                         .HasColumnType("int");
 
@@ -528,6 +531,9 @@ namespace BYO3WebAPI.Migrations
 
                     b.Property<string>("Image3")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Latitude")
                         .IsRequired()

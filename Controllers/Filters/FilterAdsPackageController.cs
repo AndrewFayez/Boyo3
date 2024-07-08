@@ -26,7 +26,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             var pac = await _db.Package.Where(x => x.Title == "Gold")
                 .SelectMany(x => x.UserAdsPackage.
-                SelectMany(x=>x.User.UserAds.Where(x=>x.Ads.Type1=="caravan" && x.Ads.AdsType == "Gold")
+                SelectMany(x=>x.User.UserAds.Where(x=>x.Ads.Type1=="caravan" && x.Ads.AdsType == "Gold"&& x.Ads.IsApproved==true)
                 .Select(
                     x => new {
                         x.Ads.Id,
@@ -67,11 +67,10 @@ namespace BYO3WebAPI.Controllers.Filters
                         x.Ads.Specifications,
                         x.Ads.YearMake,
                         x.Ads.Faults,
-                        x.Ads.AdsType
+                        x.Ads.AdsType,
+                        x.Ads.IsApproved,
                     }
                     ))).ToListAsync();
-
-
 
             return Ok(pac);    
             
@@ -85,7 +84,7 @@ namespace BYO3WebAPI.Controllers.Filters
         {
             var pac = await _db.Package.Where(x => x.Title == "Gold")
                .SelectMany(x => x.UserAdsPackage.
-               SelectMany(x => x.User.UserAds.Where(x => x.Ads.Type1 == "cars" && x.Ads.AdsType=="Gold")
+               SelectMany(x => x.User.UserAds.Where(x => x.Ads.Type1 == "cars" && x.Ads.AdsType=="Gold" && x.Ads.IsApproved== true)
                .Select(
                    x => new {
                        x.Ads.Id,
@@ -126,7 +125,8 @@ namespace BYO3WebAPI.Controllers.Filters
                        x.Ads.Specifications,
                        x.Ads.YearMake,
                        x.Ads.Faults,
-                       x.Ads.AdsType
+                       x.Ads.AdsType,
+                       x.Ads.IsApproved,
                    }
                    ))).ToListAsync();
 
@@ -145,7 +145,7 @@ namespace BYO3WebAPI.Controllers.Filters
           
                   var pac = await _db.Package.Where(x => x.Title == "Gold")
                 .SelectMany(x => x.UserAdsPackage.
-                SelectMany(x => x.User.UserAds.Where(x => x.Ads.Type1 == "motorcycles" && x.Ads.AdsType == "Gold")
+                SelectMany(x => x.User.UserAds.Where(x => x.Ads.Type1 == "motorcycles" && x.Ads.AdsType == "Gold" && x.Ads.IsApproved == true)
                 .Select(
                     x => new {
                         x.Ads.Id,
@@ -186,7 +186,8 @@ namespace BYO3WebAPI.Controllers.Filters
                         x.Ads.Specifications,
                         x.Ads.YearMake,
                         x.Ads.Faults,
-                        x.Ads.AdsType
+                        x.Ads.AdsType,
+                        x.Ads.IsApproved,
                     }
                     ))).ToListAsync();
 
@@ -203,7 +204,7 @@ namespace BYO3WebAPI.Controllers.Filters
         {
             var pac = await _db.Package.Where(x => x.Title == "Gold")
              .SelectMany(x => x.UserAdsPackage.
-             SelectMany(x => x.User.UserAds.Where(x => x.Ads.Type1 == "tools" && x.Ads.AdsType == "Gold")
+             SelectMany(x => x.User.UserAds.Where(x => x.Ads.Type1 == "tools" && x.Ads.AdsType == "Gold" && x.Ads.IsApproved == true)
              .Select(
                  x => new {
                      x.Ads.Id,
@@ -244,11 +245,10 @@ namespace BYO3WebAPI.Controllers.Filters
                      x.Ads.Specifications,
                      x.Ads.YearMake,
                      x.Ads.Faults,
-                     x.Ads.AdsType
+                     x.Ads.AdsType,
+                     x.Ads.IsApproved
                  }
                  ))).ToListAsync();
-
-
 
             return Ok(pac);
         }
@@ -262,7 +262,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             var pac = await _db.Package.Where(x => x.Title == "Gold")
           .SelectMany(x => x.UserAdsPackage.
-          SelectMany(x => x.User.UserAds.Where(x=> x.Ads.AdsType == "Gold")
+          SelectMany(x => x.User.UserAds.Where(x=> x.Ads.AdsType == "Gold" && x.Ads.IsApproved == true)
           .Select(
               x => new {
                   x.Ads.Id,
@@ -303,7 +303,8 @@ namespace BYO3WebAPI.Controllers.Filters
                   x.Ads.Specifications,
                   x.Ads.YearMake,
                   x.Ads.Faults,
-                  x.Ads.AdsType
+                  x.Ads.AdsType,
+                  x.Ads.IsApproved,
               }
               ))).ToListAsync();
 

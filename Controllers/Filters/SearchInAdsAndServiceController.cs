@@ -23,7 +23,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             var result = await _db.Ads.Where(x => x.Title.ToLower().Contains(Name.ToLower())
             || x.Title.ToLower().Contains(Name.ToLower()))
-               .SelectMany(x => x.UserAds.Select(x => new
+               .SelectMany(x => x.UserAds.Where(x=>x.Ads.IsApproved==true).Select(x => new
                {
                    x.Ads.Id,
                    x.User.FullName,
@@ -64,6 +64,7 @@ namespace BYO3WebAPI.Controllers.Filters
                    x.Ads.YearMake,
                    x.Ads.Faults,
                    x.Ads.AdsType,
+                   x.Ads.IsApproved
                })).ToListAsync();
             return Ok(result);
 
@@ -74,7 +75,7 @@ namespace BYO3WebAPI.Controllers.Filters
         {
             var prices = await _db.Ads
             .Where(x => x.Price >= minPrice && x.Price <= maxPrice)
-              .SelectMany(x => x.UserAds.Select(x => new
+              .SelectMany(x => x.UserAds.Where(x=>x.Ads.IsApproved==true).Select(x => new
               {
                   x.Ads.Id,
                   x.User.FullName,
@@ -115,6 +116,7 @@ namespace BYO3WebAPI.Controllers.Filters
                   x.Ads.YearMake,
                   x.Ads.Faults,
                   x.Ads.AdsType,
+                  x.Ads.IsApproved,
               })).ToListAsync();
             return Ok(prices);
         }
@@ -128,7 +130,7 @@ namespace BYO3WebAPI.Controllers.Filters
 
             var result = await _db.Service.Where(x => x.Title.ToLower().Contains(Name.ToLower())
             || x.Title.ToLower().Contains(Name.ToLower()))
-               .SelectMany(x => x.UserService.Select(x => new
+               .SelectMany(x => x.UserService.Where(x=>x.Service.IsApproved == true).Select(x => new
                {
                    x.Service.Id,
                    x.User.FullName,
@@ -149,7 +151,7 @@ namespace BYO3WebAPI.Controllers.Filters
                    x.Service.PhoneNumber,
                    x.Service.Price,
                    x.Service.Warranty,
-                
+                   x.Service.IsApproved,
                })).ToListAsync();
             return Ok(result);
 
@@ -160,7 +162,7 @@ namespace BYO3WebAPI.Controllers.Filters
         {
             var prices = await _db.Service
             .Where(x => x.Price >= minPrice && x.Price <= maxPrice)
-              .SelectMany(x => x.UserService.Select(x => new
+              .SelectMany(x => x.UserService.Where(x=>x.Service.IsApproved == true).Select(x => new
               {
                   x.Service.Id,
                   x.User.FullName,
@@ -181,6 +183,7 @@ namespace BYO3WebAPI.Controllers.Filters
                   x.Service.PhoneNumber,
                   x.Service.Price,
                   x.Service.Warranty,
+                  x.Service.IsApproved
               })).ToListAsync();
             return Ok(prices);
         }

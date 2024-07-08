@@ -17,14 +17,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 ///////////////// Enable CORS Policy For Web /////////////////////////////
 
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
-                      {
-                          policy.WithOrigins("http://127.0.0.1:5502/");
-                      });
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+        });
 });
+
+
+
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy(name: MyAllowSpecificOrigins,
+//                      policy =>
+//                      {
+//                          policy.WithOrigins("*");
+//                      });
+//});
 
 // Add services to the container.
 
@@ -98,6 +114,7 @@ app.UseHttpsRedirection();
 
 //////////////////////// For Web
 app.UseCors(MyAllowSpecificOrigins);
+app.UseCors("AllowAll");
 ////////////////////////
 
 app.UseAuthorization();

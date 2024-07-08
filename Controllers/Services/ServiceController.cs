@@ -42,18 +42,18 @@ namespace BYO3WebAPI.Controllers.Services
 
             if (AdsCount >= packagenumber)
             {
-
                 _db.Remove(package);
                 _db.SaveChanges();
                 return BadRequest(new { Messages = "Please Renew The Package Or Subscribe To A New Package" });
             }
 
+
             if (dTOAds.Image1 == null || dTOAds.Image1.Length == 0)
             {
-                return BadRequest(new { Messages = "No file selected." });
+                return BadRequest(new { Messages = "No File Selected." });
             }
-
-            string path1 = Path.Combine("StaticFile/Images/", dTOAds.Image1.FileName);
+            string randem1 = Guid.NewGuid().ToString();
+            string path1 = Path.Combine("StaticFile/Images/", $"{randem1}_{dTOAds.Image1.FileName}");
             string fullPath1 = Path.Combine(_host.ContentRootPath.ToString(), path1);
 
             using (var stream = new FileStream(fullPath1, FileMode.Create))
@@ -64,10 +64,11 @@ namespace BYO3WebAPI.Controllers.Services
 
             if (dTOAds.Image2 == null || dTOAds.Image2.Length == 0)
             {
-                return BadRequest(new { Messages = "No file selected." });
+                return BadRequest(new { Messages = "No File Selected." });
             }
 
-            string path2 = Path.Combine("StaticFile/Images/", dTOAds.Image2.FileName);
+            string randem2 = Guid.NewGuid().ToString();
+            string path2 = Path.Combine("StaticFile/Images/", $"{randem2}_{dTOAds.Image2.FileName}");
             string fullPath2 = Path.Combine(_host.ContentRootPath.ToString(), path2);
 
             using (var stream = new FileStream(fullPath2, FileMode.Create))
@@ -75,20 +76,20 @@ namespace BYO3WebAPI.Controllers.Services
                 await dTOAds.Image2.CopyToAsync(stream);
             }
 
-
             if (dTOAds.Image3 == null || dTOAds.Image3.Length == 0)
             {
-                return BadRequest(new { Messages = "No file selected." });
+                return BadRequest(new { Messages = "No File Selected." });
             }
 
-
-            string path3 = Path.Combine("StaticFile/Images/", dTOAds.Image3.FileName);
+            string randem3 = Guid.NewGuid().ToString();
+            string path3 = Path.Combine("StaticFile/Images/", $"{randem3}_{dTOAds.Image3.FileName}");
             string fullPath3 = Path.Combine(_host.ContentRootPath.ToString(), path3);
 
             using (var stream = new FileStream(fullPath3, FileMode.Create))
             {
                 await dTOAds.Image3.CopyToAsync(stream);
             }
+
 
 
             ServiceModels Ads = new()
@@ -114,6 +115,7 @@ namespace BYO3WebAPI.Controllers.Services
                 CountPerson = dTOAds.CountPerson,
                 FromCountry = dTOAds.FromCountry,
                 ToCountry = dTOAds.ToCountry,
+                IsApproved = false,
 
             };
             await _db.Service.AddAsync(Ads);
@@ -158,6 +160,7 @@ namespace BYO3WebAPI.Controllers.Services
                 Ads.CountPerson, 
                 Ads.FromCountry ,
                 Ads.ToCountry ,
+                Ads.IsApproved ,
             });
         }
 
@@ -166,9 +169,9 @@ namespace BYO3WebAPI.Controllers.Services
 
         // GET: api/<AdsController>
         [HttpGet("GetAllServiceForUser")]
-        public async Task<IActionResult> GetAllAds(string userId)
+        public async Task<IActionResult> GetAllServiceForUser(string userId)
         {
-            var Ads = await _db.UserService.Where(x => x.UserId == userId)
+            var Ads = await _db.UserService.Where(x => x.UserId == userId && x.Service.IsApproved == true)
                 .Select(x => 
                 new {
                     x.Service.Id,
@@ -199,10 +202,10 @@ namespace BYO3WebAPI.Controllers.Services
         }
 
 
-        [HttpGet("GetAllService")]
-        public async Task<IActionResult> GetAllService()
+        [HttpGet("GetAllServiceIsApproved")]
+        public async Task<IActionResult> GetAllServiceIsApproved()
         {
-            var posts = await _db.Service
+            var posts = await _db.Service.Where(x=>x.IsApproved == true)
                  .SelectMany(x => x.UserService.Select(x => new
                  {
                      x.Service.Id,
@@ -226,7 +229,8 @@ namespace BYO3WebAPI.Controllers.Services
                      x.Service.Warranty,
                      x.Service.FromCountry,
                      x.Service.CountPerson,
-                     x.Service.WhatsAppNumber
+                     x.Service.WhatsAppNumber,
+                     x.Service.IsApproved,
                  })).ToListAsync();
             return Ok(posts);
         }
@@ -234,12 +238,47 @@ namespace BYO3WebAPI.Controllers.Services
 
 
 
+        [HttpGet("GetAllServicePending")]
+        public async Task<IActionResult> GetAllServicePending()
+        {
+            var posts = await _db.Service.Where(x => x.IsApproved == false)
+                 .SelectMany(x => x.UserService.Select(x => new
+                 {
+                     x.Service.Id,
+                     x.Service.Title,
+                     x.Service.Description,
+                     x.Service.Type1,
+                     x.Service.Type2,
+                     x.Service.Type3,
+                     x.Service.Image1,
+                     x.Service.Image2,
+                     x.Service.Image3,
+                     x.Service.Country,
+                     x.Service.City,
+                     x.Service.CreatedDate,
+                     x.Service.Longitude,
+                     x.Service.Latitude,
+                     x.Service.PhoneNumber,
+                     x.Service.Price,
+                     x.Service.CountDay,
+                     x.Service.ToCountry,
+                     x.Service.Warranty,
+                     x.Service.FromCountry,
+                     x.Service.CountPerson,
+                     x.Service.WhatsAppNumber,
+                     x.Service.IsApproved,
+                 })).ToListAsync();
+            return Ok(posts);
+        }
+
+
+
 
         // GET api/<AdsController>/5
-        [HttpGet("GetOneService")]
-        public async Task<IActionResult> GetOneAds(int id)
+        [HttpGet("GetOneServiceIsApproved")]
+        public async Task<IActionResult> GetOneServiceIsApproved(int id)
         {
-            var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id);
+            var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id && x.IsApproved == true);
             return Ok(new
             {
                 Ads.Id,
@@ -264,10 +303,41 @@ namespace BYO3WebAPI.Controllers.Services
                 Ads.CountPerson,
                 Ads.FromCountry,
                 Ads.ToCountry,
+                Ads.IsApproved
             });
         }
 
-
+        [HttpGet("GetOneServicePending")]
+        public async Task<IActionResult> GetOneServicePending(int id)
+        {
+            var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id && x.IsApproved == false);
+            return Ok(new
+            {
+                Ads.Id,
+                Ads.Title,
+                Ads.Type1,
+                Ads.Type2,
+                Ads.Type3,
+                Ads.Country,
+                Ads.City,
+                Ads.CreatedDate,
+                Ads.Description,
+                Ads.Price,
+                Ads.Image1,
+                Ads.Image2,
+                Ads.Image3,
+                Ads.Latitude,
+                Ads.Longitude,
+                Ads.PhoneNumber,
+                Ads.Warranty,
+                Ads.WhatsAppNumber,
+                Ads.CountDay,
+                Ads.CountPerson,
+                Ads.FromCountry,
+                Ads.ToCountry,
+                Ads.IsApproved
+            });
+        }
 
 
         // DELETE api/<AdsController>/5

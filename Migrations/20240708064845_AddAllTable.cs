@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BYO3WebAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class AddALlTable : Migration
+    public partial class AddAllTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,6 +21,7 @@ namespace BYO3WebAPI.Migrations
                     Type1 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type2 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Type3 = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Type4 = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -30,9 +31,30 @@ namespace BYO3WebAPI.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Warranty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    AdsType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ColorIn = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ColorOut = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YearMake = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Cylinders = table.Column<int>(type: "int", nullable: true),
+                    Kilometer = table.Column<int>(type: "int", nullable: true),
+                    AddOns = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PublicStatus = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Faults = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Security = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Specifications = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GeneratorType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AirConditionType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AirConditionSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AirConditionCount = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NormalOrSaylant = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NumberOfParson = table.Column<int>(type: "int", nullable: true),
+                    Height = table.Column<int>(type: "int", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,7 +84,7 @@ namespace BYO3WebAPI.Migrations
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     longitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     latitude = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageCover = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    ImageCover = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CountAds = table.Column<int>(type: "int", nullable: true),
                     CountService = table.Column<int>(type: "int", nullable: true),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -182,6 +204,7 @@ namespace BYO3WebAPI.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Warranty = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Longitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Latitude = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Image1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -191,7 +214,8 @@ namespace BYO3WebAPI.Migrations
                     CountPerson = table.Column<int>(type: "int", nullable: false),
                     FromCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ToCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -411,6 +435,28 @@ namespace BYO3WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AdsForPackage",
+                columns: table => new
+                {
+                    AdsId = table.Column<int>(type: "int", nullable: false),
+                    PackageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AdsForPackage", x => new { x.PackageId, x.AdsId });
+                    table.ForeignKey(
+                        name: "FK_AdsForPackage_Ads_AdsId",
+                        column: x => x.AdsId,
+                        principalTable: "Ads",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_AdsForPackage_Package_PackageId",
+                        column: x => x.PackageId,
+                        principalTable: "Package",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserPackage",
                 columns: table => new
                 {
@@ -500,6 +546,28 @@ namespace BYO3WebAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ServiceForPackage",
+                columns: table => new
+                {
+                    ServiceId = table.Column<int>(type: "int", nullable: false),
+                    ServicePackageId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceForPackage", x => new { x.ServiceId, x.ServicePackageId });
+                    table.ForeignKey(
+                        name: "FK_ServiceForPackage_ServicePackage_ServicePackageId",
+                        column: x => x.ServicePackageId,
+                        principalTable: "ServicePackage",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ServiceForPackage_Service_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Service",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserServicePackage",
                 columns: table => new
                 {
@@ -520,6 +588,11 @@ namespace BYO3WebAPI.Migrations
                         principalTable: "ServicePackage",
                         principalColumn: "Id");
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AdsForPackage_AdsId",
+                table: "AdsForPackage",
+                column: "AdsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -566,6 +639,11 @@ namespace BYO3WebAPI.Migrations
                 column: "BillId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ServiceForPackage_ServicePackageId",
+                table: "ServiceForPackage",
+                column: "ServicePackageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAds_AdsId",
                 table: "UserAds",
                 column: "AdsId");
@@ -605,6 +683,9 @@ namespace BYO3WebAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "AdsForPackage");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
             migrationBuilder.DropTable(
@@ -627,6 +708,9 @@ namespace BYO3WebAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "RefreshToken");
+
+            migrationBuilder.DropTable(
+                name: "ServiceForPackage");
 
             migrationBuilder.DropTable(
                 name: "UserAds");

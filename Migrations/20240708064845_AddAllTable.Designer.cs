@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BYO3WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240620121208_updatephoto")]
-    partial class updatephoto
+    [Migration("20240708064845_AddAllTable")]
+    partial class AddAllTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -310,6 +310,9 @@ namespace BYO3WebAPI.Migrations
                     b.Property<string>("Image3")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("bit");
+
                     b.Property<int?>("Kilometer")
                         .HasColumnType("int");
 
@@ -531,6 +534,9 @@ namespace BYO3WebAPI.Migrations
 
                     b.Property<string>("Image3")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsApproved")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Latitude")
                         .IsRequired()

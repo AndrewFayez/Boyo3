@@ -47,13 +47,14 @@ namespace BYO3WebAPI.Controllers.Ads
                 return BadRequest(new { Messages = "Please Renew The Package Or Subscribe To A New Package" });
             }
 
+
+
             if (dTOAds.Image1 == null || dTOAds.Image1.Length == 0)
             {
                 return BadRequest(new { Messages = "No File Selected." });
-
             }
-
-            string path1 = Path.Combine("StaticFile/Images/", dTOAds.Image1.FileName);
+            string randem1 = Guid.NewGuid().ToString();
+            string path1 = Path.Combine("StaticFile/Images/", $"{randem1}_{dTOAds.Image1.FileName}" );
             string fullPath1 = Path.Combine(_host.ContentRootPath.ToString(), path1);
 
             using (var stream = new FileStream(fullPath1, FileMode.Create))
@@ -67,8 +68,8 @@ namespace BYO3WebAPI.Controllers.Ads
                 return BadRequest(new { Messages = "No File Selected." });
             }
 
-
-            string path2 = Path.Combine("StaticFile/Images/", dTOAds.Image2.FileName);
+            string randem2 = Guid.NewGuid().ToString();
+            string path2 = Path.Combine("StaticFile/Images/", $"{randem2}_{dTOAds.Image2.FileName}");
             string fullPath2 = Path.Combine(_host.ContentRootPath.ToString(), path2);
 
             using (var stream = new FileStream(fullPath2, FileMode.Create))
@@ -76,21 +77,23 @@ namespace BYO3WebAPI.Controllers.Ads
                 await dTOAds.Image2.CopyToAsync(stream);
             }
 
-
             if (dTOAds.Image3 == null || dTOAds.Image3.Length == 0)
             {
                 return BadRequest(new { Messages = "No File Selected." });
-
             }
 
-
-            string path3 = Path.Combine("StaticFile/Images/", dTOAds.Image3.FileName);
+            string randem3 = Guid.NewGuid().ToString();
+            string path3 = Path.Combine("StaticFile/Images/", $"{randem3}_{dTOAds.Image3.FileName}");
             string fullPath3 = Path.Combine(_host.ContentRootPath.ToString(), path3);
 
             using (var stream = new FileStream(fullPath3, FileMode.Create))
             {
                 await dTOAds.Image3.CopyToAsync(stream);
             }
+
+
+
+
 
             AdsModel Ads = new()
             {
@@ -131,6 +134,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 Size = dTOAds.Size,
                 Specifications = dTOAds.Specifications,
                 YearMake = dTOAds.YearMake,
+                IsApproved = false,
                
             };
             await _db.Ads.AddAsync(Ads);
@@ -192,6 +196,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 ,Ads.Security ,
                 Ads.Specifications,
                 Ads.YearMake,
+                Ads.IsApproved,
             });
         }
 
@@ -219,13 +224,14 @@ namespace BYO3WebAPI.Controllers.Ads
                 return BadRequest(new { Messages="Please Renew The Package Or Subscribe To A New Package" });
             }
 
+
             if (dTOAds.Image1 == null || dTOAds.Image1.Length == 0)
             {
                 return BadRequest(new { Messages = "No File Selected." });
 
             }
-
-            string path1 = Path.Combine("StaticFile/Images/", dTOAds.Image1.FileName);
+            string randem1 = Guid.NewGuid().ToString();
+            string path1 = Path.Combine("StaticFile/Images/", $"{randem1}_{dTOAds.Image1.FileName}");
             string fullPath1 = Path.Combine(_host.ContentRootPath.ToString(), path1);
 
             using (var stream = new FileStream(fullPath1, FileMode.Create))
@@ -234,14 +240,16 @@ namespace BYO3WebAPI.Controllers.Ads
             }
 
 
+
+
+
             if (dTOAds.Image2 == null || dTOAds.Image2.Length == 0)
             {
                 return BadRequest(new { Messages = "No File Selected." });
-
             }
 
-
-            string path2 = Path.Combine("StaticFile/Images/", dTOAds.Image2.FileName);
+            string randem2 = Guid.NewGuid().ToString();
+            string path2 = Path.Combine("StaticFile/Images/", $"{randem2}_{dTOAds.Image2.FileName}");
             string fullPath2 = Path.Combine(_host.ContentRootPath.ToString(), path2);
 
             using (var stream = new FileStream(fullPath2, FileMode.Create))
@@ -257,7 +265,8 @@ namespace BYO3WebAPI.Controllers.Ads
             }
 
 
-            string path3 = Path.Combine("StaticFile/Images/", dTOAds.Image3.FileName);
+            string randem3 = Guid.NewGuid().ToString();
+            string path3 = Path.Combine("StaticFile/Images/", $"{randem3}_{dTOAds.Image3.FileName}");
             string fullPath3 = Path.Combine(_host.ContentRootPath.ToString(), path3);
 
             using (var stream = new FileStream(fullPath3, FileMode.Create))
@@ -304,7 +313,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 NormalOrSaylant = "NoData",
                 NumberOfParson = 0,
                 Size = "NoData",
-
+                IsApproved= false,
 
             };
             await _db.Ads.AddAsync(Ads);
@@ -370,6 +379,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 Ads.Security,
                 Ads.Specifications,
                 Ads.YearMake,
+                Ads.IsApproved,
             });
         }
 
@@ -397,13 +407,14 @@ namespace BYO3WebAPI.Controllers.Ads
                 return BadRequest(new { Messages = "Please Renew The Package Or Subscribe To A New Package" });
             }
 
+
             if (dTOAds.Image1 == null || dTOAds.Image1.Length == 0)
             {
-                return BadRequest(new { Messages = "No File Selected."});
+                return BadRequest(new { Messages = "No File Selected." });
 
             }
-
-            string path1 = Path.Combine("StaticFile/Images/", dTOAds.Image1.FileName);
+            string randem1 = Guid.NewGuid().ToString();
+            string path1 = Path.Combine("StaticFile/Images/", $"{randem1}_{dTOAds.Image1.FileName}");
             string fullPath1 = Path.Combine(_host.ContentRootPath.ToString(), path1);
 
             using (var stream = new FileStream(fullPath1, FileMode.Create))
@@ -412,14 +423,16 @@ namespace BYO3WebAPI.Controllers.Ads
             }
 
 
+
+
+
             if (dTOAds.Image2 == null || dTOAds.Image2.Length == 0)
             {
                 return BadRequest(new { Messages = "No File Selected." });
-
             }
 
-
-            string path2 = Path.Combine("StaticFile/Images/", dTOAds.Image2.FileName);
+            string randem2 = Guid.NewGuid().ToString();
+            string path2 = Path.Combine("StaticFile/Images/", $"{randem2}_{dTOAds.Image2.FileName}");
             string fullPath2 = Path.Combine(_host.ContentRootPath.ToString(), path2);
 
             using (var stream = new FileStream(fullPath2, FileMode.Create))
@@ -435,7 +448,8 @@ namespace BYO3WebAPI.Controllers.Ads
             }
 
 
-            string path3 = Path.Combine("StaticFile/Images/", dTOAds.Image3.FileName);
+            string randem3 = Guid.NewGuid().ToString();
+            string path3 = Path.Combine("StaticFile/Images/", $"{randem3}_{dTOAds.Image3.FileName}");
             string fullPath3 = Path.Combine(_host.ContentRootPath.ToString(), path3);
 
             using (var stream = new FileStream(fullPath3, FileMode.Create))
@@ -482,6 +496,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 NormalOrSaylant = "NoData",
                 NumberOfParson = 0,
                 Size = "NoData",
+                IsApproved = false,
             };
             await _db.Ads.AddAsync(Ads);
             _db.SaveChanges();
@@ -547,6 +562,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 Ads.Security,
                 Ads.Specifications,
                 Ads.YearMake,
+                Ads.IsApproved,
             });
         }
 
@@ -574,12 +590,15 @@ namespace BYO3WebAPI.Controllers.Ads
                 return BadRequest(new { Messages = "Please Renew The Package Or Subscribe To A New Package" });
             }
 
+
+
             if (dTOAds.Image1 == null || dTOAds.Image1.Length == 0)
             {
-                return BadRequest(new { Messages = "No file selected." });
-            }
+                return BadRequest(new { Messages = "No File Selected." });
 
-            string path1 = Path.Combine("StaticFile/Images/", dTOAds.Image1.FileName);
+            }
+            string randem1 = Guid.NewGuid().ToString();
+            string path1 = Path.Combine("StaticFile/Images/", $"{randem1}_{dTOAds.Image1.FileName}");
             string fullPath1 = Path.Combine(_host.ContentRootPath.ToString(), path1);
 
             using (var stream = new FileStream(fullPath1, FileMode.Create))
@@ -588,13 +607,16 @@ namespace BYO3WebAPI.Controllers.Ads
             }
 
 
+
+
+
             if (dTOAds.Image2 == null || dTOAds.Image2.Length == 0)
             {
-                return BadRequest(new { Messages = "No file selected." });
+                return BadRequest(new { Messages = "No File Selected." });
             }
 
-
-            string path2 = Path.Combine("StaticFile/Images/", dTOAds.Image2.FileName);
+            string randem2 = Guid.NewGuid().ToString();
+            string path2 = Path.Combine("StaticFile/Images/", $"{randem2}_{dTOAds.Image2.FileName}");
             string fullPath2 = Path.Combine(_host.ContentRootPath.ToString(), path2);
 
             using (var stream = new FileStream(fullPath2, FileMode.Create))
@@ -605,17 +627,22 @@ namespace BYO3WebAPI.Controllers.Ads
 
             if (dTOAds.Image3 == null || dTOAds.Image3.Length == 0)
             {
-                return BadRequest(new { Messages = "No file selected." });
+                return BadRequest(new { Messages = "No File Selected." });
+
             }
 
 
-            string path3 = Path.Combine("StaticFile/Images/", dTOAds.Image3.FileName);
+            string randem3 = Guid.NewGuid().ToString();
+            string path3 = Path.Combine("StaticFile/Images/", $"{randem3}_{dTOAds.Image3.FileName}");
             string fullPath3 = Path.Combine(_host.ContentRootPath.ToString(), path3);
 
             using (var stream = new FileStream(fullPath3, FileMode.Create))
             {
                 await dTOAds.Image3.CopyToAsync(stream);
             }
+
+
+
 
             AdsModel Ads = new()
             {
@@ -656,7 +683,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 NormalOrSaylant = "NoData",
                 NumberOfParson = 0,
                 Size = "NoData",
-
+                IsApproved=false,
             };
             await _db.Ads.AddAsync(Ads);
             _db.SaveChanges();
@@ -721,6 +748,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 Ads.Security,
                 Ads.Specifications,
                 Ads.YearMake,
+                Ads.IsApproved,
             });
         }
 
@@ -728,11 +756,11 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
         // GET: api/<AdsController>
-        [HttpGet("GetAllAdsForUser")]
+        [HttpGet("GetAllAdsForUserApproved")]
         public async Task<IActionResult> GetAllAdsForUser(string userId)
         {
             var posts = await _db.UserAds.Where(x => x.UserId == userId)
-                .SelectMany(P => P.Ads.UserAds.Select(x => new
+                .SelectMany(P => P.Ads.UserAds.Where(x=> x.Ads.IsApproved == true).Select(x => new
                 {
                     x.Ads.Id,
                     x.User.FullName,
@@ -773,17 +801,69 @@ namespace BYO3WebAPI.Controllers.Ads
                     x.Ads.YearMake,
                     x.Ads.Faults,
                     x.Ads.AdsType,
-
+                    x.Ads.IsApproved
                 })).ToListAsync();
             return Ok(posts);
         }
 
 
-        [HttpGet("GetAllAds")]
-        public async Task<IActionResult> GetAllAds()
+        [HttpGet("GetAllAdsForUserPending")]
+        public async Task<IActionResult> GetAllAdsForUserPending(string userId)
+        {
+            var posts = await _db.UserAds.Where(x => x.UserId == userId)
+                .SelectMany(P => P.Ads.UserAds.Where(x => x.Ads.IsApproved == false).Select(x => new
+                {
+                    x.Ads.Id,
+                    x.User.FullName,
+                    x.Ads.Title,
+                    x.Ads.Description,
+                    x.Ads.WhatsAppNumber,
+                    x.Ads.Type1,
+                    x.Ads.Type2,
+                    x.Ads.Type3,
+                    x.Ads.Type4,
+                    x.Ads.Image1,
+                    x.Ads.Image2,
+                    x.Ads.Image3,
+                    x.Ads.Country,
+                    x.Ads.City,
+                    x.Ads.CreatedDate,
+                    x.Ads.Longitude,
+                    x.Ads.Latitude,
+                    x.Ads.PhoneNumber,
+                    x.Ads.Price,
+                    x.Ads.Warranty,
+                    x.Ads.Security,
+                    x.Ads.Height,
+                    x.Ads.GeneratorType,
+                    x.Ads.Size,
+                    x.Ads.AddOns,
+                    x.Ads.AirConditionCount,
+                    x.Ads.AirConditionSize,
+                    x.Ads.AirConditionType,
+                    x.Ads.ColorIn,
+                    x.Ads.ColorOut,
+                    x.Ads.Cylinders,
+                    x.Ads.Kilometer,
+                    x.Ads.NormalOrSaylant,
+                    x.Ads.NumberOfParson,
+                    x.Ads.PublicStatus,
+                    x.Ads.Specifications,
+                    x.Ads.YearMake,
+                    x.Ads.Faults,
+                    x.Ads.AdsType,
+                    x.Ads.IsApproved
+                })).ToListAsync();
+            return Ok(posts);
+        }
+
+
+
+        [HttpGet("GetAllAdsApproved")]
+        public async Task<IActionResult> GetAllAdsApproved()
         {
             var posts = await _db.Ads
-                 .SelectMany(x => x.UserAds.Select(x => new
+                 .SelectMany(x => x.UserAds.Where(x=>x.Ads.IsApproved == true).Select(x => new
                  {
                      x.Ads.Id,
                      x.User.FullName,
@@ -824,18 +904,21 @@ namespace BYO3WebAPI.Controllers.Ads
                      x.Ads.YearMake,
                      x.Ads.Faults,
                      x.Ads.AdsType,
+                     x.Ads.IsApproved
                  })).ToListAsync();
             return Ok(posts);
         }
 
 
+
+
      
 
         // GET api/<AdsController>/5
-        [HttpGet("GetOneAds")]
+        [HttpGet("GetOneAdsApproved")]
         public async Task<IActionResult> GetOneAds(int id)
         {
-            var posts = _db.Ads.Where(x => x.Id == id).SelectMany(x => x.UserAds.Select(x => new
+            var posts = _db.Ads.Where(x => x.Id == id).SelectMany(x => x.UserAds.Where(x => x.Ads.IsApproved == true).Select(x => new
             {
                 x.Ads.Id,
                 x.User.FullName,
@@ -876,7 +959,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 x.Ads.YearMake,
                 x.Ads.Faults,
                 x.Ads.AdsType,
-
+                x.Ads.IsApproved
             }));
             return  Ok(posts);
         }
