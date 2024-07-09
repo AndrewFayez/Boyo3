@@ -172,10 +172,36 @@ namespace BYO3WebAPI.Controllers.User
                     x.Email,
                     x.CountAds,
                     x.CountService,
-                    x.DateTime
+                    x.DateTime,
+                    x.IsAdmin,
                 }).ToListAsync();
             return Ok(user);
         }
+
+
+
+        [HttpGet("GetOneUser")]
+        public async Task<IActionResult> GetOneUser(string userId)
+        {
+
+            var user = await _db.Users.Where(x=>x.Id==userId)
+                .Select(x => new
+                {
+                    x.Id,
+                    x.FullName,
+                    x.PhoneNumber,
+                    x.UserName,
+                    x.Email,
+                    x.CountAds,
+                    x.CountService,
+                    x.DateTime,
+                    x.IsAdmin,
+                }).ToListAsync();
+            return Ok(user);
+        }
+
+
+
 
     }
 }

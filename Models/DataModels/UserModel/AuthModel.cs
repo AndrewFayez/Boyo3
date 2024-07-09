@@ -5,6 +5,7 @@ namespace BYO3WebAPI.Models.DataModels.UserModel
     public class AuthModel
     {
         public string Id { get; set; }
+        public bool IsAdmin { get; set; }   
 
         public string Message { get; set; }
         public bool IsAuthenticated { get; set; }

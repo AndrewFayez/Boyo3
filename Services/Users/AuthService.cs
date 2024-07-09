@@ -44,14 +44,6 @@ namespace BYO3WebAPI.Services.Users
         public async Task<AuthModel> RegistrationAsync(RegisterModel model)
         {
 
-            //var useremail = await _userManager.Users.SingleOrDefaultAsync(x => x.Email == model.Email);
-            //var username = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == model.Username);
-
-
-            //if (useremail != null && username != null)
-            //    return new AuthModel { Message = "Email or UserName is already registered!" };
-
-
 
             var userEmail = await _db.Users.SingleOrDefaultAsync(x => x.Email.ToLower() == model.Email.ToLower());
             if (userEmail != null)
@@ -88,6 +80,7 @@ namespace BYO3WebAPI.Services.Users
                 longitude = model.longitude,
                 latitude = model.latitude,
                 DateTime = DateTime.Now,
+                IsAdmin = false,
  
             };
 
@@ -122,7 +115,8 @@ namespace BYO3WebAPI.Services.Users
                 Username = user.UserName,
                 RefreshToken = refreshToken.Token,
                 RefreshTokenExpiration = refreshToken.ExpiresOn,
-                Id=user.Id
+                Id=user.Id,
+                IsAdmin = (bool)user.IsAdmin
             };
             
            
@@ -224,6 +218,7 @@ namespace BYO3WebAPI.Services.Users
             authModel.Username = user.UserName;
             authModel.ExpiresOn = jwtSecurityToken.ValidTo;
             authModel.Id = user.Id;
+            authModel.IsAdmin = (bool)user.IsAdmin;
 
             if (user.RefreshTokens.Any(t => t.IsActive))
             {
@@ -327,9 +322,9 @@ namespace BYO3WebAPI.Services.Users
             authModel.IsAuthenticated = true;
             authModel.Token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
             authModel.Email = user.Email;
-            authModel.Username = user.UserName
-                
-                ;
+            authModel.Username = user.UserName;
+            authModel.IsAdmin = (bool)user.IsAdmin;
+
             var roles = await _userManager.GetRolesAsync(user);
             authModel.RefreshToken = newRefreshToken.Token;
             authModel.RefreshTokenExpiration = newRefreshToken.ExpiresOn;

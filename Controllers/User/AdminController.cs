@@ -17,6 +17,44 @@ namespace BYO3WebAPI.Controllers.User
         {
             _db = db;
         }
+
+
+        [HttpPut("IsAdmin/AddAdmin")]
+        public async Task<IActionResult> AddAdmin([FromForm] string userId)
+        {
+
+            var Ads = await _db.Users.SingleOrDefaultAsync(x => x.Id == userId);
+            if (Ads == null)
+            {
+                return NotFound(new { Messages = $"User Id {userId} Not Exists Or IsAdmin" });
+            }
+
+            if (Ads.IsAdmin == false)
+                Ads.IsAdmin = true;
+
+
+            _db.Users.Update(Ads);
+            _db.SaveChanges();
+
+
+            return Ok(
+                new
+                {
+                    Ads.Id,
+                    Ads.FullName,
+                    Ads.PhoneNumber,
+                    Ads.UserName,
+                    Ads.Email,
+                    Ads.CountAds,
+                    Ads.CountService,
+                    Ads.DateTime,
+                    Ads.IsAdmin,
+                });
+
+        }
+
+
+
         [HttpGet("GetAllAds/Pending")]
         public async Task<IActionResult> GetAllAdsPending()
         {

@@ -16,6 +16,7 @@
         public string? latitude { get; set; }
 
         public IFormFile? ImageCover { get; set; }
+        public bool? IsAdmin { get; set; }=false;
 
        // public DateTime? DateTime { get; set; }
 

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BYO3WebAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240708064845_AddAllTable")]
+    [Migration("20240709065938_AddAllTable")]
     partial class AddAllTable
     {
         /// <inheritdoc />
@@ -58,6 +58,9 @@ namespace BYO3WebAPI.Migrations
 
                     b.Property<string>("ImageCover")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");

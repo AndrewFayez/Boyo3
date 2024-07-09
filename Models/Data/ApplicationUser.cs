@@ -23,6 +23,7 @@ namespace BYO3WebAPI.Models.Data
         public string? ImageCover { get; set; }
         public int? CountAds { get; set; } = 0;
         public int? CountService { get; set; } = 0;
+        public bool? IsAdmin { get; set; }=false;
 
         public DateTime? DateTime { get; set; }
 

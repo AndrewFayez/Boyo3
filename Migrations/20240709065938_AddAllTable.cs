@@ -87,6 +87,7 @@ namespace BYO3WebAPI.Migrations
                     ImageCover = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CountAds = table.Column<int>(type: "int", nullable: true),
                     CountService = table.Column<int>(type: "int", nullable: true),
+                    IsAdmin = table.Column<bool>(type: "bit", nullable: true),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

@@ -56,6 +56,9 @@ namespace BYO3WebAPI.Migrations
                     b.Property<string>("ImageCover")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool?>("IsAdmin")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
