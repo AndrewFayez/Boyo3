@@ -19,8 +19,8 @@ namespace BYO3WebAPI.Controllers.User
         }
 
 
-        [HttpPut("IsAdmin/AddAdmin")]
-        public async Task<IActionResult> AddAdmin([FromForm] string userId)
+        [HttpPut("IsAdmin/AddAdmin/{userId}")]
+        public async Task<IActionResult> AddAdmin(string userId)
         {
 
             var Ads = await _db.Users.SingleOrDefaultAsync(x => x.Id == userId);
@@ -63,6 +63,7 @@ namespace BYO3WebAPI.Controllers.User
                  {
                      x.Ads.Id,
                      x.User.FullName,
+                     UserId =x.User.Id,
                      x.Ads.Title,
                      x.Ads.Description,
                      x.Ads.WhatsAppNumber,
@@ -106,6 +107,7 @@ namespace BYO3WebAPI.Controllers.User
         }
 
 
+
         [HttpGet("GetOneAds/Pending")]
         public async Task<IActionResult> GetOneAdsPending(int id)
         {
@@ -113,6 +115,7 @@ namespace BYO3WebAPI.Controllers.User
             {
                 x.Ads.Id,
                 x.User.FullName,
+                     UserId =x.User.Id,
                 x.Ads.Title,
                 x.Ads.Description,
                 x.Ads.WhatsAppNumber,
@@ -157,8 +160,8 @@ namespace BYO3WebAPI.Controllers.User
 
 
 
-        [HttpPut("ApprovedOn/Ads")]
-        public async Task<IActionResult> AdminIsApproved([FromForm] int id)
+        [HttpPut("ApprovedOn/Ads/{id}")]
+        public async Task<IActionResult> AdminIsApproved( int id)
         {
 
             var Ads = await _db.Ads.SingleOrDefaultAsync(x => x.Id == id);
@@ -172,7 +175,7 @@ namespace BYO3WebAPI.Controllers.User
 
 
             var userAds = _db.UserAds
-                 .Where(x => x.AdsId == id).Select(x=>x.User.FullName);
+                 .Where(x => x.AdsId == id).Select(x=>new { x.User.FullName ,x.User.Id});
 
             _db.Ads.Update(Ads);
             _db.SaveChanges();
@@ -228,8 +231,8 @@ namespace BYO3WebAPI.Controllers.User
 
 
 
-        [HttpPut("ApprovedOn/Service")]
-        public async Task<IActionResult> AdminIsApprovedService([FromForm] int id)
+        [HttpPut("ApprovedOn/Service/{id}")]
+        public async Task<IActionResult> AdminIsApprovedService( int id)
         {
 
             var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id);
@@ -243,7 +246,7 @@ namespace BYO3WebAPI.Controllers.User
 
 
             var userAds = _db.UserService
-                 .Where(x => x.ServiceId == id).Select(x => x.User.FullName);
+                 .Where(x => x.ServiceId == id).Select(x =>new { x.User.FullName , x.User.Id});
 
             _db.Service.Update(Ads);
             _db.SaveChanges();
@@ -289,6 +292,7 @@ namespace BYO3WebAPI.Controllers.User
                  .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == false).Select(x => new
                  {
                     
+                     UserId =x.User.Id,
                      x.User.FullName,
                      x.Service.Id,
                      x.Service.Title,
@@ -324,6 +328,7 @@ namespace BYO3WebAPI.Controllers.User
         {
             var posts = _db.Service.Where(x => x.Id == id).SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == false).Select(x => new
             {
+                     UserId =x.User.Id,
                 x.User.FullName,
                 x.Service.Id,
                 x.Service.Title,

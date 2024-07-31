@@ -28,6 +28,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 new {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -80,6 +81,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -133,6 +135,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -184,6 +187,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -237,6 +241,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -289,6 +294,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -341,6 +347,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -394,6 +401,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -446,6 +454,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -499,6 +508,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -552,6 +562,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -606,6 +617,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -660,6 +672,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -714,6 +727,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -766,6 +780,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -819,6 +834,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -870,6 +886,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -921,6 +938,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -973,6 +991,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -1026,6 +1045,7 @@ namespace BYO3WebAPI.Controllers.Filters
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,

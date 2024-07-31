@@ -159,6 +159,7 @@ namespace BYO3WebAPI.Controllers.Ads
             return Ok(new {
                 Ads.Id ,
                 countAds.FullName,
+                UserId =countAds.Id,
                 Ads.Title ,
                 Ads.Description , 
                 Ads.PhoneNumber ,
@@ -339,6 +340,7 @@ namespace BYO3WebAPI.Controllers.Ads
             {
                 Ads.Id,
                 countAds.FullName,
+                UserId = countAds.Id,
                 Ads.Title,
                 Ads.Description,
                 Ads.PhoneNumber,
@@ -522,6 +524,7 @@ namespace BYO3WebAPI.Controllers.Ads
             {
                 Ads.Id,
                 countAds.FullName,
+                UserId =countAds.Id,
                 Ads.Title,
                 Ads.Description,
                 Ads.PhoneNumber,
@@ -708,6 +711,7 @@ namespace BYO3WebAPI.Controllers.Ads
             {
                 Ads.Id,
                 countAds.FullName,
+                UserId =countAds.Id,
                 Ads.Title,
                 Ads.Description,
                 Ads.PhoneNumber,
@@ -764,6 +768,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -815,6 +820,7 @@ namespace BYO3WebAPI.Controllers.Ads
                 {
                     x.Ads.Id,
                     x.User.FullName,
+                    UserId= x.User.Id,
                     x.Ads.Title,
                     x.Ads.Description,
                     x.Ads.WhatsAppNumber,
@@ -867,6 +873,7 @@ namespace BYO3WebAPI.Controllers.Ads
                  {
                      x.Ads.Id,
                      x.User.FullName,
+                     UserId= x.User.Id,
                      x.Ads.Title,
                      x.Ads.Description,
                      x.Ads.WhatsAppNumber,
@@ -922,6 +929,7 @@ namespace BYO3WebAPI.Controllers.Ads
             {
                 x.Ads.Id,
                 x.User.FullName,
+                UserId= x.User.Id,
                 x.Ads.Title,
                 x.Ads.Description,
                 x.Ads.WhatsAppNumber,
@@ -966,7 +974,7 @@ namespace BYO3WebAPI.Controllers.Ads
 
 
         // DELETE api/<AdsController>/5
-        [HttpDelete("DeleteAds")]
+        [HttpDelete("DeleteAds/{id}/{userId}")]
         public async Task<IActionResult> Delete(int id , string userId)
         {
             var ads = await _db.Ads.SingleOrDefaultAsync(x => x.Id == id);

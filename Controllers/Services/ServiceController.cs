@@ -138,6 +138,8 @@ namespace BYO3WebAPI.Controllers.Services
             _db.SaveChanges();
 
             return Ok(new {
+               UserId = countAds.Id,
+                countAds.FullName,
                 Ads.Id,
                 Ads.Title, 
                 Ads.Type1,
@@ -174,6 +176,8 @@ namespace BYO3WebAPI.Controllers.Services
             var Ads = await _db.UserService.Where(x => x.UserId == userId && x.Service.IsApproved == true)
                 .Select(x => 
                 new {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -209,6 +213,8 @@ namespace BYO3WebAPI.Controllers.Services
             var posts = await _db.Service.Where(x=>x.IsApproved == true)
                  .SelectMany(x => x.UserService.Select(x => new
                  {
+                     UserId = x.User.Id,
+                     x.User.FullName,
                      x.Service.Id,
                      x.Service.Title,
                      x.Service.Description,
@@ -245,6 +251,8 @@ namespace BYO3WebAPI.Controllers.Services
             var posts = await _db.Service.Where(x => x.IsApproved == false)
                  .SelectMany(x => x.UserService.Select(x => new
                  {
+                     UserId = x.User.Id,
+                     x.User.FullName,
                      x.Service.Id,
                      x.Service.Title,
                      x.Service.Description,
@@ -279,90 +287,96 @@ namespace BYO3WebAPI.Controllers.Services
         [HttpGet("GetOneServiceIsApproved")]
         public async Task<IActionResult> GetOneServiceIsApproved(int id)
         {
-            var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id && x.IsApproved == true);
-            return Ok(new
-            {
-                Ads.Id,
-                Ads.Title,
-                Ads.Type1,
-                Ads.Type2,
-                Ads.Type3,
-                Ads.Country,
-                Ads.City,
-                Ads.CreatedDate,
-                Ads.Description,
-                Ads.Price,
-                Ads.Image1,
-                Ads.Image2,
-                Ads.Image3,
-                Ads.Latitude,
-                Ads.Longitude,
-                Ads.PhoneNumber,
-                Ads.Warranty,
-                Ads.WhatsAppNumber,
-                Ads.CountDay,
-                Ads.CountPerson,
-                Ads.FromCountry,
-                Ads.ToCountry,
-                Ads.IsApproved
-            });
+            var posts = await _db.Service.Where(x =>x.Id==id && x.IsApproved == true)
+                .SelectMany(x => x.UserService.Select(x => new
+                {
+                    UserId = x.User.Id,
+                    x.User.FullName,
+                    x.Service.Id,
+                    x.Service.Title,
+                    x.Service.Description,
+                    x.Service.Type1,
+                    x.Service.Type2,
+                    x.Service.Type3,
+                    x.Service.Image1,
+                    x.Service.Image2,
+                    x.Service.Image3,
+                    x.Service.Country,
+                    x.Service.City,
+                    x.Service.CreatedDate,
+                    x.Service.Longitude,
+                    x.Service.Latitude,
+                    x.Service.PhoneNumber,
+                    x.Service.Price,
+                    x.Service.CountDay,
+                    x.Service.ToCountry,
+                    x.Service.Warranty,
+                    x.Service.FromCountry,
+                    x.Service.CountPerson,
+                    x.Service.WhatsAppNumber,
+                    x.Service.IsApproved,
+                })).ToListAsync();
+            return Ok(posts);
         }
 
         [HttpGet("GetOneServicePending")]
         public async Task<IActionResult> GetOneServicePending(int id)
         {
-            var Ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id && x.IsApproved == false);
-            return Ok(new
-            {
-                Ads.Id,
-                Ads.Title,
-                Ads.Type1,
-                Ads.Type2,
-                Ads.Type3,
-                Ads.Country,
-                Ads.City,
-                Ads.CreatedDate,
-                Ads.Description,
-                Ads.Price,
-                Ads.Image1,
-                Ads.Image2,
-                Ads.Image3,
-                Ads.Latitude,
-                Ads.Longitude,
-                Ads.PhoneNumber,
-                Ads.Warranty,
-                Ads.WhatsAppNumber,
-                Ads.CountDay,
-                Ads.CountPerson,
-                Ads.FromCountry,
-                Ads.ToCountry,
-                Ads.IsApproved
-            });
+            var posts = await _db.Service.Where(x =>x.Id==id && x.IsApproved == false)
+      .SelectMany(x => x.UserService.Select(x => new
+      {
+          UserId = x.User.Id,
+          x.User.FullName,
+          x.Service.Id,
+          x.Service.Title,
+          x.Service.Description,
+          x.Service.Type1,
+          x.Service.Type2,
+          x.Service.Type3,
+          x.Service.Image1,
+          x.Service.Image2,
+          x.Service.Image3,
+          x.Service.Country,
+          x.Service.City,
+          x.Service.CreatedDate,
+          x.Service.Longitude,
+          x.Service.Latitude,
+          x.Service.PhoneNumber,
+          x.Service.Price,
+          x.Service.CountDay,
+          x.Service.ToCountry,
+          x.Service.Warranty,
+          x.Service.FromCountry,
+          x.Service.CountPerson,
+          x.Service.WhatsAppNumber,
+          x.Service.IsApproved,
+      })).ToListAsync();
+            return Ok(posts);
         }
 
 
         // DELETE api/<AdsController>/5
-        [HttpDelete("DeleteService")]
+        [HttpDelete("DeleteService/{id}/{userId}")]
         public async Task<IActionResult> Delete(int id ,string userId)
         {
             var ads = await _db.Service.SingleOrDefaultAsync(x => x.Id == id);
+            var adspackage = await _db.ServiceForPackage.SingleOrDefaultAsync(x => x.ServiceId == ads.Id);
             var userAds = await _db.UserService.SingleOrDefaultAsync(x => x.ServiceId == id && x.UserId == userId);
-
             if (ads == null)
             {
-                return BadRequest(new { Messages = "This Service Is Not Found"});
+                return BadRequest(new { Messages = "This Service Is Not Found" });
+
             }
-           
             if (userAds == null)
             {
-                return BadRequest(new { Messages = "This User Is Not Found" });
+                return BadRequest(new { Messages = "This Service Is Not Found" });
 
             }
             _db.UserService.Remove(userAds);
+            _db.ServiceForPackage.Remove(adspackage);
             _db.Service.Remove(ads);
-
             _db.SaveChanges();
-            return Ok(ads.Title);
+            return Ok(new { ads.Id, ads.Title, ads.Description, ads.PhoneNumber });
         }
     }
 }

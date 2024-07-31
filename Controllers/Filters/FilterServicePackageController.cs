@@ -28,6 +28,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved==true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -72,6 +74,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -117,6 +121,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -161,6 +167,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -208,6 +216,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -253,6 +263,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -297,6 +309,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -340,6 +354,8 @@ namespace BYO3WebAPI.Controllers.Filters
             {
                 var ads = _db.UserService.Where(x => x.UserId == item.Id && x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,

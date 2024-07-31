@@ -26,6 +26,7 @@ namespace BYO3WebAPI.Controllers.Filters
                .SelectMany(x => x.UserAds.Where(x=>x.Ads.IsApproved==true).Select(x => new
                {
                    x.Ads.Id,
+                   UserId = x.User.Id,
                    x.User.FullName,
                    x.Ads.Title,
                    x.Ads.Description,
@@ -78,6 +79,7 @@ namespace BYO3WebAPI.Controllers.Filters
               .SelectMany(x => x.UserAds.Where(x=>x.Ads.IsApproved==true).Select(x => new
               {
                   x.Ads.Id,
+                  UserId = x.User.Id,
                   x.User.FullName,
                   x.Ads.Title,
                   x.Ads.Description,
@@ -133,6 +135,7 @@ namespace BYO3WebAPI.Controllers.Filters
                .SelectMany(x => x.UserService.Where(x=>x.Service.IsApproved == true).Select(x => new
                {
                    x.Service.Id,
+                   UserId = x.User.Id,
                    x.User.FullName,
                    x.Service.Title,
                    x.Service.Description,
@@ -165,6 +168,7 @@ namespace BYO3WebAPI.Controllers.Filters
               .SelectMany(x => x.UserService.Where(x=>x.Service.IsApproved == true).Select(x => new
               {
                   x.Service.Id,
+                  UserId = x.User.Id,
                   x.User.FullName,
                   x.Service.Title,
                   x.Service.Description,

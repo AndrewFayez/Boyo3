@@ -23,6 +23,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var post =await _db.Service.Where(x => x.Type1 == service)
                .SelectMany(x => x.UserService.Where(x=>x.Service.IsApproved==true).Select(x => new
                {
+                    UserId= x.User.Id,
+                    x.User.FullName,
                    x.Service.Id,
                    x.Service.Title,
                    x.Service.Description,
@@ -59,6 +61,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var post =await _db.Service.Where(x => x.Type2 == service)
                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                {
+                   UserId = x.User.Id,
+                   x.User.FullName,
                    x.Service.Id,
                    x.Service.Title,
                    x.Service.Description,
@@ -95,6 +99,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var post =await _db.Service.Where(x => x.Type3 == service)
                .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                {
+                   UserId = x.User.Id,
+                   x.User.FullName,
                    x.Service.Id,
                    x.Service.Title,
                    x.Service.Description,
@@ -133,6 +139,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic =await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -168,6 +176,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic =await _db.Service.Where(x => x.Type2 == serv3 && x.Type3 == serv2)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -204,6 +214,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic =await _db.Service.Where(x => x.Type1 == serv1 && x.Type3 == serv2)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -240,6 +252,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var caravan =await _db.Service.Where(x => x.Type1 == serv1 && x.Country == Country)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -276,6 +290,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic = await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2 && x.Country == Country)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -313,6 +329,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic = await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2 && x.Type3 == serv3)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -348,6 +366,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var caravan = await _db.Service.Where(x => x.City == city && x.Country == Country)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -383,6 +403,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic = await _db.Service.Where(x => x.Type1 == serv1 && x.Type2 == serv2 && x.City == city)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
@@ -419,6 +441,8 @@ namespace BYO3WebAPI.Controllers.Filters
             var servic = await _db.Service.Where(x => x.Type1 == serv1 &&  x.City == city)
                 .SelectMany(x => x.UserService.Where(x => x.Service.IsApproved == true).Select(x => new
                 {
+                    UserId = x.User.Id,
+                    x.User.FullName,
                     x.Service.Id,
                     x.Service.Title,
                     x.Service.Description,
